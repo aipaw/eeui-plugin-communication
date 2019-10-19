@@ -44,7 +44,9 @@ public class AppcommunicationModule extends WXModule {
             PermissionChecker.requestPermissions((Activity) mWXSDKInstance.getContext(), dialog, new eeui.android.communication.module.permission.ModuleResultListener() {
                 @Override
                 public void onResult(Object o) {
-                    if ((boolean) o) jsCallback.invoke(Util.getError(Constant.CALL_PHONE_PERMISSION_DENIED, Constant.CALL_PHONE_PERMISSION_DENIED_CODE));
+                    if ((boolean) o && jsCallback != null) {
+                        jsCallback.invoke(Util.getError(Constant.CALL_PHONE_PERMISSION_DENIED, Constant.CALL_PHONE_PERMISSION_DENIED_CODE));
+                    }
                 }
             }, Constant.CALL_PHONE_PERMISSION_REQUEST_CODE, Manifest.permission.CALL_PHONE);
         } else {
@@ -57,7 +59,9 @@ public class AppcommunicationModule extends WXModule {
         CommunicationModule.getInstance(mWXSDKInstance.getContext()).mail(tos, params, new ModuleResultListener() {
             @Override
             public void onResult(Object o) {
-                jsCallback.invoke(o);
+                if (jsCallback != null) {
+                    jsCallback.invoke(o);
+                }
             }
         });
     }
@@ -67,7 +71,9 @@ public class AppcommunicationModule extends WXModule {
         CommunicationModule.getInstance(mWXSDKInstance.getContext()).sms(tos, text, new ModuleResultListener() {
             @Override
             public void onResult(Object o) {
-                jsCallback.invoke(o);
+                if (jsCallback != null) {
+                    jsCallback.invoke(o);
+                }
             }
         });
     }
@@ -79,7 +85,9 @@ public class AppcommunicationModule extends WXModule {
             if (PermissionChecker.hasAllPermissionsGranted(grantResults)) {
                 realCall(mCallNumber, mCallCallback);
             } else {
-                mCallCallback.invoke(Util.getError(Constant.CALL_PHONE_PERMISSION_DENIED, Constant.CALL_PHONE_PERMISSION_DENIED_CODE));
+                if (mCallCallback != null) {
+                    mCallCallback.invoke(Util.getError(Constant.CALL_PHONE_PERMISSION_DENIED, Constant.CALL_PHONE_PERMISSION_DENIED_CODE));
+                }
             }
         }
     }
@@ -88,7 +96,9 @@ public class AppcommunicationModule extends WXModule {
         CommunicationModule.getInstance(mWXSDKInstance.getContext()).call(number, new ModuleResultListener() {
             @Override
             public void onResult(Object o) {
-                jsCallback.invoke(o);
+                if (jsCallback != null) {
+                    jsCallback.invoke(o);
+                }
             }
         });
     }
