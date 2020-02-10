@@ -19,7 +19,7 @@ public class communicationEntry {
 
         //1、注册weex模块
         try {
-            WXSDKEngine.registerModule("communication", AppcommunicationModule.class);
+            WXSDKEngine.registerModule("eeuiCommunication", AppcommunicationModule.class);
         } catch (WXException e) {
             e.printStackTrace();
         }

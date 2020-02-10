@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
 
 
 
-  s.name         = "communication"
+  s.name         = "eeuiCommunication"
   s.version      = "1.0.0"
   s.summary      = "eeui plugin."
   s.description  = <<-DESC
@@ -13,11 +13,11 @@ Pod::Spec.new do |s|
 
   s.homepage     = "https://eeui.app"
   s.license      = "MIT"
-  s.author             = { "veryitman" => "aipaw@live.cn" }
+  s.author             = { "kuaifan" => "aipaw@live.cn" }
   s.source =  { :path => '.' }
-  s.source_files  = "communication", "**/**/*.{h,m,mm,c}"
+  s.source_files  = "eeuiCommunication", "**/**/*.{h,m,mm,c}"
   s.exclude_files = "Source/Exclude"
-  s.resources = 'communication/resources/*.*'
+  s.resources = 'eeuiCommunication/resources/*.*'
   s.platform     = :ios, "8.0"
   s.requires_arc = true
 
