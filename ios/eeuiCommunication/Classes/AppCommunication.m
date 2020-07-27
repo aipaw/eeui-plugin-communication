@@ -5,7 +5,7 @@
 
 #import "AppCommunication.h"
 #import <MessageUI/MessageUI.h>
-
+#import "UINavigationController+FDFullscreenPopGesture.h"
 
 @interface AppCommunication ()
 
@@ -85,6 +85,8 @@
     if (messageClass != nil) {
         //有发送功能要做的事情
         MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+        UIViewController *rootViewController = messageController.viewControllers.firstObject;
+        rootViewController.fd_prefersNavigationBarHidden = YES;
         messageController.messageComposeDelegate = self;
         //拼接并设置短信内容
         NSString *messageContent = text;
@@ -94,9 +96,8 @@
         messageController.recipients = phone;
         
         //推到发送试图控制器
-        [[self getCurrentVC] presentViewController:messageController animated:YES completion:^{
-            
-        }];
+        [[self getCurrentVC] presentViewController:messageController animated:YES completion:nil];
+        // [[[[messageController viewControllers] lastObject] navigationItem] setTitle:@"新消息"];//修改短信界面标题
     }else{
         callback(@{@"error":@{@"msg":@"SEND_SMS_PERMISSION_DENIED ",@"code":@1}},nil);
     }
